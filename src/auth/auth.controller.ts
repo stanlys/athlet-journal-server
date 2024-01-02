@@ -1,9 +1,18 @@
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Request,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDTO } from './dto/createUser.dto';
 import { UserResponseType } from './type/userResponse.type';
 import { LoginDTO } from './dto/login.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ExpressRequest } from './middlewares/auth.middleware';
 
 @ApiTags('Auth endpoint')
 @Controller('auth')
@@ -34,5 +43,14 @@ export class AuthController {
   async login(@Body() loginDto: LoginDTO): Promise<UserResponseType> {
     const user = await this.authService.loginUser(loginDto);
     return this.authService.buildUserResponse(user);
+  }
+
+  @ApiOperation({ summary: 'Login by email & password' })
+  @Get('login')
+  async currentUser(
+    @Request() request: ExpressRequest,
+  ): Promise<UserResponseType> {
+    if (!request.user) throw new UnauthorizedException('Un Auth');
+    return this.authService.buildUserResponse(request.user);
   }
 }

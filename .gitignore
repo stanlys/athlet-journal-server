@@ -1,7 +1,7 @@
 # compiled output
 /dist
 /node_modules
-/mongo-data-4.4/
+/mongo-data-4.4
 
 # Logs
 logs
@@ -36,4 +36,21 @@ lerna-debug.log*
 !.vscode/extensions.json
 mongo-data-4.4/collection-4--1283747060498175659.wt
 mongo-data-4.4/diagnostic.data/metrics.interim
+mongo-data-4.4/diagnostic.data/metrics.interim
+mongo-data-4.4/_mdb_catalog.wt
+mongo-data-4.4/collection-0--1283747060498175659.wt
+mongo-data-4.4/collection-0--8149071682283325470.wt
+mongo-data-4.4/collection-2--1283747060498175659.wt
+mongo-data-4.4/collection-4--1283747060498175659.wt
+mongo-data-4.4/collection-7--1283747060498175659.wt
+mongo-data-4.4/index-1--1283747060498175659.wt
+mongo-data-4.4/index-1--8149071682283325470.wt
+mongo-data-4.4/index-3--1283747060498175659.wt
+mongo-data-4.4/index-5--1283747060498175659.wt
+mongo-data-4.4/index-6--1283747060498175659.wt
+mongo-data-4.4/index-8--1283747060498175659.wt
+mongo-data-4.4/index-9--1283747060498175659.wt
+mongo-data-4.4/sizeStorer.wt
+mongo-data-4.4/WiredTiger.turtle
+mongo-data-4.4/WiredTiger.wt
 mongo-data-4.4/diagnostic.data/metrics.interim

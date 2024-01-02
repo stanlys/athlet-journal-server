@@ -6,6 +6,8 @@ import { Model } from 'mongoose';
 import { UserResponseType } from './type/userResponse.type';
 import { LoginDTO } from './dto/login.dto';
 import { compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+import { TOKEN_KEY } from './jwt.token';
 
 @Injectable()
 export class AuthService {
@@ -61,6 +63,21 @@ export class AuthService {
     return {
       userName: userEntity.userName,
       email: userEntity.email,
+      token: this.generateToken(userEntity),
     };
+  }
+
+  generateToken(userEntity: UserEntity): string {
+    const token = sign(
+      { email: userEntity.email, userName: userEntity.userName },
+      TOKEN_KEY,
+      { expiresIn: '12h' },
+    );
+    return token;
+  }
+
+  async findByEmail(email: string): Promise<UserEntity> {
+    const user = this.userModel.findOne({ email: email });
+    return user;
   }
 }
