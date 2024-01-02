@@ -1,7 +1,7 @@
 # compiled output
 /dist
 /node_modules
-/mongo-data-4.4
+/mongo-data-4.4/
 
 # Logs
 logs
@@ -34,3 +34,6 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+mongo-data-4.4/collection-4--1283747060498175659.wt
+mongo-data-4.4/diagnostic.data/metrics.interim
+mongo-data-4.4/diagnostic.data/metrics.interim
