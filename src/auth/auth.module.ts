@@ -4,11 +4,19 @@ import { AuthController } from './auth.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserEntity, UserEntitySchema } from './schema/createUser.schema';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import {
+  AdditionalUserInfoEntity,
+  AdditionalUserInfoEntitySchema,
+} from './schema/additionalUserInfo.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: UserEntity.name, schema: UserEntitySchema },
+      {
+        name: AdditionalUserInfoEntity.name,
+        schema: AdditionalUserInfoEntitySchema,
+      },
     ]),
   ],
   providers: [AuthService],

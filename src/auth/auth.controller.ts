@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Post,
+  Put,
   Request,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { UserResponseType } from './type/userResponse.type';
 import { LoginDTO } from './dto/login.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ExpressRequest } from './middlewares/auth.middleware';
+import { UpdateUserDTO } from './dto/updateUser.dto';
+import { AdditionalUserInfoEntityDocument } from './schema/additionalUserInfo.schema';
 
 @ApiTags('Auth endpoint')
 @Controller('auth')
@@ -39,18 +42,35 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Login by email & password' })
-  @Post('login')
+  @Post('user')
   async login(@Body() loginDto: LoginDTO): Promise<UserResponseType> {
     const user = await this.authService.loginUser(loginDto);
     return this.authService.buildUserResponse(user);
   }
 
-  @ApiOperation({ summary: 'Login by email & password' })
-  @Get('login')
+  @ApiOperation({ summary: 'Get user information' })
+  @Get('user')
   async currentUser(
     @Request() request: ExpressRequest,
   ): Promise<UserResponseType> {
     if (!request.user) throw new UnauthorizedException('Un Auth');
     return this.authService.buildUserResponse(request.user);
+  }
+
+  @ApiOperation({ summary: 'Get user information' })
+  @Get('user/add')
+  async getAllUserInfo(): Promise<AdditionalUserInfoEntityDocument> {
+    return this.authService.getAllUserInfo();
+  }
+
+  @ApiOperation({ summary: 'Update user information' })
+  @Put('user')
+  async updateUser(
+    @Request() request: ExpressRequest,
+    @Body() updateUserDto: UpdateUserDTO,
+  ): Promise<void> {
+    console.log(request, updateUserDto);
+    if (!request.user) throw new UnauthorizedException('Un Auth');
+    await this.authService.updateUserInfo(request.user, updateUserDto);
   }
 }

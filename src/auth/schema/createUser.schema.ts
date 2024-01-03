@@ -9,7 +9,7 @@ export class UserEntity {
   @Prop()
   userName: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()

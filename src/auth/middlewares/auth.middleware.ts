@@ -4,9 +4,11 @@ import { UserEntity } from '../schema/createUser.schema';
 import { verify } from 'jsonwebtoken';
 import { TOKEN_KEY } from '../jwt.token';
 import { AuthService } from '../auth.service';
+import { UpdateUserDTO } from '../dto/updateUser.dto';
 
 export interface ExpressRequest extends Request {
   user?: UserEntity;
+  additionalInfo: UpdateUserDTO;
 }
 
 @Injectable()
